@@ -11,6 +11,7 @@ import (
 
 var pay []Record
 var b []uint8
+var c []uint8
 
 type Record struct {
 	Name    string
@@ -20,18 +21,25 @@ type Record struct {
 
 func main() {
 	pay := csvf("table.csv")
-	fmt.Printf("%T\n", pay)
-	fmt.Println(marsh(b))
+	//marshal
+	j, err := json.Marshal(pay)
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+	os.Stdout.Write(j)
+	fmt.Printf("%T", j)
+	crf(j)
+
 }
 func csvf(filePath string) []Record {
 	//open
-	c, err := os.Open(filePath)
+	e, err := os.Open(filePath)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	defer c.Close()
+	defer e.Close()
 	//read
-	d := csv.NewReader(c)
+	d := csv.NewReader(e)
 	rowd, err := d.ReadAll()
 	if err != nil {
 		log.Fatal(err)
@@ -51,12 +59,18 @@ func csvf(filePath string) []Record {
 	}
 	return pay
 }
-func marsh(s []uint8) []uint8 {
-	//marshal
-	b, err := json.Marshal(pay)
+
+func crf(b []uint8) {
+	//open and read
+	f, err := os.OpenFile("table.json", os.O_APPEND|os.O_CREATE|os.O_RDWR, 0644)
 	if err != nil {
-		fmt.Println("error:", err)
+		log.Fatal(err)
 	}
-	os.Stdout.Write(b)
-	return b
+	defer f.Close()
+	//write
+	j, err := f.Write(b)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(j)
 }
