@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/Wen77/Golang/goroutine1/functions"
+	"github.com/Wen77/golang/goroutine1/functions"
 )
 
 func main() {

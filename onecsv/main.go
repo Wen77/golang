@@ -25,7 +25,7 @@ func main() {
 		sbrut := make(map[string]float64)
 		sbrut[record.Name] = 100 + record.Salaire + record.Bonus
 		for key, val := range sbrut {
-			fmt.Printf("%T", key, val)
+
 			fmt.Println(key, "-", val)
 		}
 	}
