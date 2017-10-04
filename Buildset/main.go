@@ -4,11 +4,15 @@ import (
 	"fmt"
 )
 
-type set map[string]struct{}
+type set map[string]struct {
+	libel string
+}
 
 func main() {
 	x := make(set)
-	x["a"] = struct{}{}
+	x["a"] = struct {
+		First: "James",
+	}{}
 	x["b"] = struct{}{}
 	fmt.Println(getvalue(x))
 }
