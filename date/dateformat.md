@@ -13,7 +13,7 @@ const (
 )
 
 func main() {
-	
+
 	a := "01/09/2017"
 	b := "30/05/2010"
 
@@ -28,7 +28,7 @@ func main() {
 
 	fmt.Printf("%s %s\n", t.Format("02/01/2006"), s.Format("02/01/2006"))
 
-	//Find the difference between two days : indicating the number of day , month and year
+	//Find the difference between two days : indicating the number of days , months and years
 
 	diffD := s.Day() - t.Day() + 1
 	diffM := t.Month() - s.Month()
